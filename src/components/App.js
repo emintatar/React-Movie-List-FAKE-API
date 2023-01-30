@@ -42,9 +42,14 @@ class App extends React.Component {
   };
 
   render() {
-    let filteredMovies = this.state.movies.filter((movie) => {
-      return movie.name.toLowerCase().indexOf(this.state.searchQuery) !== -1;
-    });
+    let filteredMovies = this.state.movies
+      .filter((movie) => {
+        return movie.name.toLowerCase().indexOf(this.state.searchQuery) !== -1;
+      })
+      .sort((a, b) => {
+        // Sort by rating in descending order
+        return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
+      });
 
     return (
       <Router>
